@@ -31,24 +31,22 @@ class Game {
     
 // MARK:methods
     
-    func newGame() ->([Card]) {
-   let newDeckk = Card.newDeck(aceValue: 11)
-        return newDeckk
+    func newGame() ->() {
+        deck = Card.newDeck(aceValue: 11)
+        player.score = 0
+        hitPlayer = true
+     //let blackJackStart = tiffanyBlack.newGame()
     }
-    
-    
+        
    /* func stopHits() -> () {
         let stoppHitss = computerVsPlayer()
         return stoppHitss
         }*/
     
-    func hitMe(_:[Card])-> Card {
-        var playerCards = player.cards
-        let card = deck.randomElement()
-        playerCards.append(card ?? Card(suit: Suit.heart, value: 10, isFaceCard: true, face:FaceCard.queen ))
+    func hitMe()-> Card? {
+        player.cards.append(contentsOf: deck.shuffled())
         
-        
-        return playerCards.popLast() ?? Card(suit: Suit.heart, value: 10, isFaceCard: true, face: FaceCard.queen)
+        return player.cards.popLast()
     }
         
     func computerVsPlayer(){
@@ -63,11 +61,11 @@ class Game {
     }
     
     
-    func gameStatus(playerCard: Card) -> Int {
+    func gameStatus(playerCard: [Card]) -> Int {
         var currentScore = player.score
-        let hitMeScore = hitMe(deck).value
+        let hitMeScore = hitMe()?.value
         
-        currentScore += hitMeScore
+        currentScore += hitMeScore ?? 0
         
         if currentScore < 20 {
             print ("Hit or Pass")
@@ -81,3 +79,4 @@ class Game {
     }
     
 }
+  var tiffanyBlack = Game(player: Player(score: 0, cards: Card.newDeck(aceValue: 11), playerName: "Tiffany"), hitPlayer: true)

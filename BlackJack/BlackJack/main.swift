@@ -12,32 +12,39 @@ import Foundation
 //print("There are \(Card.newDeck(aceValue: 1).count) in a deck of cards")
 // There are 52 in a deck of cards
 
-let tiffanyBlack = Game(player: Player(score: 0, cards: Card.newDeck(aceValue: 11), playerName: "Tiffany"), hitPlayer: true)
-    
-let blackJackStart = tiffanyBlack.newGame()
+
 var gameOver:Bool = false
 var hitOrPassStatement = """
-Choose Wisely
+Choose Wisely. Type in 1 or 2
 1. Hit
 2. Pass
 """
-var userStartsGame = readLine() ?? ""
+
 
 repeat {
+    
     print("WELCOME TO BLACKJACK!!!!")
     sleep(2)
     print("Would you like to play? please type in \"yes\" or \"no\".")
     
-    userStartsGame = readLine() ?? ""
+    let userStartsGame = readLine() ?? ""
     
     if userStartsGame.uppercased().lowercased() == "yes"{
         print(hitOrPassStatement)
+        
         let userHitOrPass = readLine() ?? ""
         
-        if userHitOrPass == "1"{
-            tiffanyBlack.hitMe(blackJackStart)
+        if userHitOrPass == "1" {
+            tiffanyBlack.hitPlayer = true
+            
+            if tiffanyBlack.hitPlayer == true {
+                print(tiffanyBlack.hitMe() ?? Card(suit: Suit.diamond, value: 7, isFaceCard: false, face: nil))
+            }
+        } else if userHitOrPass == "2"{
+            
+          print("You're Score is..... \(tiffanyBlack.gameStatus(playerCard: tiffanyBlack.player.cards))")
+    
         }
-        
   } else if userStartsGame.uppercased().lowercased() == "no"{
         print("Thanks for playing! Have a great day!")
         gameOver = false
@@ -46,5 +53,5 @@ repeat {
     
     
 } while
-gameOver
+ gameOver
 
