@@ -37,12 +37,12 @@ class Game {
     }
     
     
-    func stopHits() -> () {
+   /* func stopHits() -> () {
         let stoppHitss = computerVsPlayer()
         return stoppHitss
-        }
+        }*/
     
-    func hitMe()-> Card {
+    func hitMe(_:[Card])-> Card {
         var playerCards = player.cards
         let card = deck.randomElement()
         playerCards.append(card ?? Card(suit: Suit.heart, value: 10, isFaceCard: true, face:FaceCard.queen ))
@@ -65,8 +65,17 @@ class Game {
     
     func gameStatus(playerCard: Card) -> Int {
         var currentScore = player.score
+        let hitMeScore = hitMe(deck).value
         
-        currentScore += hitMe().value
+        currentScore += hitMeScore
+        
+        if currentScore < 20 {
+            print ("Hit or Pass")
+        } else if currentScore == 21 {
+            print ("BOOM!!! BLACK JACK ! ")
+        } else if currentScore > 21 {
+            print("Beat it BUSTER!!!! Haha, get it? That's a BUST")
+        }
         
         return currentScore
     }
