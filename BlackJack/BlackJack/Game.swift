@@ -9,7 +9,7 @@
 import Foundation
 
 class Game {
-    // MARK:properties
+// MARK:properties
     
     //instance properties
     var deck = [Card]()
@@ -29,22 +29,36 @@ class Game {
         self.player = player
     }
     
-    // MARK:methods
+// MARK:methods
     
     func newGame() {
+       Card.newDeck(aceValue: 11)
         
     }
+    
     
     func stopHits(){
+computerVsPlayer()
+        }
+    
+    func hitMe() {
         
+    }
+        
+    func computerVsPlayer(){
+        let cpuScore = Int.random(in: 17...21)
+        if cpuScore > player.score {
+            print ("Sorry! You Lost 😭")
+        } else if cpuScore < player.score {
+                print("🔥YOU'RE 👏🏾 A 👏🏾 FREAKIN'👏🏾 ROCKSTAR! 🔥")
+        } else {
+            print(" 💀 IT'S A TIE 🤡 ")
+        }
     }
     
-    func computerVsPlayer(){
-        
-    }
     
     func gameStatus(){
-        
+       let current = player.cards.count
     }
     
 }
