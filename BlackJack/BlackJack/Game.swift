@@ -31,18 +31,24 @@ class Game {
     
 // MARK:methods
     
-    func newGame() {
-       Card.newDeck(aceValue: 11)
-        
+    func newGame() ->([Card]) {
+   let newDeckk = Card.newDeck(aceValue: 11)
+        return newDeckk
     }
     
     
-    func stopHits(){
-computerVsPlayer()
+    func stopHits() -> () {
+        let stoppHitss = computerVsPlayer()
+        return stoppHitss
         }
     
-    func hitMe() {
+    func hitMe()-> Card {
+        var playerCards = player.cards
+        let card = deck.randomElement()
+        playerCards.append(card ?? Card(suit: Suit.heart, value: 10, isFaceCard: true, face:FaceCard.queen ))
         
+        
+        return playerCards.popLast() ?? Card(suit: Suit.heart, value: 10, isFaceCard: true, face: FaceCard.queen)
     }
         
     func computerVsPlayer(){
@@ -57,8 +63,12 @@ computerVsPlayer()
     }
     
     
-    func gameStatus(){
-       let current = player.cards.count
+    func gameStatus(playerCard: Card) -> Int {
+        var currentScore = player.score
+        
+        currentScore += hitMe().value
+        
+        return currentScore
     }
     
 }
