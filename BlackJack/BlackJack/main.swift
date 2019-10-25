@@ -19,6 +19,14 @@ Choose Wisely. Type in "Hit" or "Pass" to Start!
 """
 var tiffanyBlack = Game.init(player: Player(score: 0, cards: [], playerName: ""), hitPlayer: true)
 
+tiffanyBlack.newGame()
+
+//let hitPlayerr = tiffanyBlack.hitMe()
+
+let stringCard = Card.stringify
+
+//var tiffCard = tiffanyBlack.player.cards
+
 
 //let hitPlayerr = tiffanyBlack.hitMe()
     
@@ -43,7 +51,9 @@ repeat {
     
     if userStartPlaying.uppercased().lowercased() == "hit" {
         
-        tiffanyBlack.player.cards.append(hitPlayerr ?? Card(suit: Suit.club, value: 10, isFaceCard: true, face: FaceCard.jack))
+        let _ = tiffanyBlack.hitMe()
+        //tiffanyBlack.player.cards.append(card ?? Card(suit: Suit.club, value: 10, isFaceCard: true, face: FaceCard.jack))
+        print(tiffanyBlack.player.cards.map{ $0.stringify() })
         
             } else if userStartPlaying.uppercased().lowercased() == "pass" {
        
@@ -51,8 +61,7 @@ repeat {
     
         }
     
-} while
-        gameOver == false
+} while tiffanyBlack.hasMoreCards
 
 if userStartsGame.uppercased().lowercased() == "no"{
     print("Thanks for playing! Have a great day!")

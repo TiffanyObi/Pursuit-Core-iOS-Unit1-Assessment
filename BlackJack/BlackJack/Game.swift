@@ -45,15 +45,18 @@ class Game {
     
     func hitMe()-> Card? {
         
+        print("deck has ", deck.count)
+        
         deck = deck.shuffled()
     
         player.cards.append(deck.randomElement() ?? Card(suit: Suit.diamond, value: 10, isFaceCard: true, face: FaceCard.king))
         
-        print(gameStatus())
-        
         for card in player.cards {
             print(card.stringify())
         }
+        
+        print(gameStatus())
+        
         return deck.popLast()
     }
         
@@ -86,8 +89,3 @@ class Game {
     }
     
 }
-let hitPlayerr = tiffanyBlack.hitMe()
-
-let stringCard = Card.stringify
-
-var tiffCard = tiffanyBlack.player.cards
