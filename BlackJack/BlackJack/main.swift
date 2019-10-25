@@ -34,7 +34,7 @@ let stringCard = Card.stringify
     sleep(2)
     print("Would you like to play? please type in \"yes\" or \"no\".")
     
-    let userStartsGame = readLine() ?? ""
+var userStartsGame = readLine() ?? ""
     
     if userStartsGame.uppercased().lowercased() == "yes"{
         
@@ -44,26 +44,31 @@ let stringCard = Card.stringify
         
         tiffanyBlack.player.playerName.append(contentsOf: userNameInput)
  print("Awesome \(userNameInput)! \(hitOrPassStatement)")
-}
+
 repeat {
-    print("Hit or Pass!")
+    
      let userStartPlaying = readLine() ?? ""
     
     if userStartPlaying.uppercased().lowercased() == "hit" {
         
         let _ = tiffanyBlack.hitMe()
-        //tiffanyBlack.player.cards.append(card ?? Card(suit: Suit.club, value: 10, isFaceCard: true, face: FaceCard.jack))
+        
         print(tiffanyBlack.player.cards.map{ $0.stringify() })
         
             } else if userStartPlaying.uppercased().lowercased() == "pass" {
        
         print("You're Score is..... \(tiffanyBlack.gameStatus())")
-    
+        tiffanyBlack.computerVsPlayer()
+        break
         }
     
-} while tiffanyBlack.hasMoreCards
+} while gameOver == false
 
-if userStartsGame.uppercased().lowercased() == "no"{
+        print("Would you Like to play again?")
+        
+        userStartsGame = readLine() ?? ""
+        
+    }else if userStartsGame.uppercased().lowercased() == "no"{
     print("Thanks for playing! Have a great day!")
     gameOver = true
     

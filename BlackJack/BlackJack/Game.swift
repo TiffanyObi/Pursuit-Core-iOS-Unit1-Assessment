@@ -45,44 +45,53 @@ class Game {
     
     func hitMe()-> Card? {
         
-        print("deck has ", deck.count)
+        //print("deck has ", deck.count)
         
-        deck = deck.shuffled()
-    
-        player.cards.append(deck.randomElement() ?? Card(suit: Suit.diamond, value: 10, isFaceCard: true, face: FaceCard.king))
+        let shuffledDeck = deck.shuffled()
+        let randomCard = shuffledDeck.randomElement()
         
-        for card in player.cards {
-            print(card.stringify())
-        }
+      player.cards.append(randomCard ?? Card(suit: Suit.diamond, value: 10, isFaceCard: true, face: FaceCard.king))
         
-        print(gameStatus())
+        let randomCardValue = randomCard?.value ?? 0
+        player.score += randomCardValue
         
+        print("Your score is \(gameStatus())")
+        print("Would You like To Hit or Pass?")
         return deck.popLast()
     }
         
     func computerVsPlayer(){
         
         if randomComputerScore > player.score {
+            print(randomComputerScore)
             print ("Sorry! You Lost 😭")
         } else if randomComputerScore < player.score {
+                print(randomComputerScore)
                 print("🔥YOU'RE 👏🏾 A 👏🏾 FREAKIN'👏🏾 ROCKSTAR! 🔥")
         } else {
+            print(randomComputerScore)
             print(" 💀 IT'S A TIE 🤡 ")
         }
     }
     
     
     func gameStatus() -> Int {
-       
         
-        player.score += deck.popLast()?.value ?? 0
-        
+      
+         
         if player.score < 20 {
-            print ("Hit or Pass")
+            
         } else if player.score == 21 {
+            
             print ("BOOM!!! BLACK JACK ! ")
+            gameOver = true
+           
+            
         } else if player.score > 21 {
+            
             print("Beat it BUSTER!!!! Haha, get it? That's a BUST")
+            gameOver = true
+            
         }
         
         return player.score
