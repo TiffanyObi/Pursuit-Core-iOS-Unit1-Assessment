@@ -44,12 +44,16 @@ class Game {
         }*/
     
     func hitMe()-> Card? {
+        
         deck = deck.shuffled()
+    
+        player.cards.append(deck.randomElement() ?? Card(suit: Suit.diamond, value: 10, isFaceCard: true, face: FaceCard.king))
         
-        player.cards.append(deck.first ?? Card(suit: Suit.diamond, value: 9, isFaceCard: false, face: nil))
+        print(gameStatus())
         
-        let update = gameStatus()
-        print(update)
+        for card in player.cards {
+            print(card.stringify())
+        }
         return deck.popLast()
     }
         
@@ -67,9 +71,8 @@ class Game {
     
     func gameStatus() -> Int {
        
-        let hitMeScore = hitMe()?.value
         
-        player.score += hitMeScore ?? 0
+        player.score += deck.popLast()?.value ?? 0
         
         if player.score < 20 {
             print ("Hit or Pass")
@@ -83,7 +86,8 @@ class Game {
     }
     
 }
+let hitPlayerr = tiffanyBlack.hitMe()
 
+let stringCard = Card.stringify
 
-//var tiffanyBlack = Game.init(player: Player(score: 0, cards: [], playerName: ""), hitPlayer: true)
-
+var tiffCard = tiffanyBlack.player.cards

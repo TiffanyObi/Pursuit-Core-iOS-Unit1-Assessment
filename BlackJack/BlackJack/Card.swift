@@ -19,7 +19,9 @@ struct Card {
     var face: FaceCard?
     
     func stringify() -> String {
+        
         var cardStr = ""
+        
         if self.isFaceCard {
             cardStr += self.face?.rawValue ?? "🤣"
         } else {
