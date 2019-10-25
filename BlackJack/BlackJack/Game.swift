@@ -21,7 +21,7 @@ class Game {
         return !deck.isEmpty
     }
     var randomComputerScore:Int{
-        return Int()
+        return Int.random(in: 17...21)
     }
     
     init(player:Player,hitPlayer:Bool){
@@ -35,7 +35,7 @@ class Game {
         deck = Card.newDeck(aceValue: 11)
         player.score = 0
         hitPlayer = true
-     //let blackJackStart = tiffanyBlack.newGame()
+     
     }
         
    /* func stopHits() -> () {
@@ -44,16 +44,20 @@ class Game {
         }*/
     
     func hitMe()-> Card? {
-        player.cards.append(contentsOf: deck.shuffled())
+        deck = deck.shuffled()
         
-        return player.cards.popLast()
+        player.cards.append(deck.first ?? Card(suit: Suit.diamond, value: 9, isFaceCard: false, face: nil))
+        
+        let update = gameStatus()
+        print(update)
+        return deck.popLast()
     }
         
     func computerVsPlayer(){
-        let cpuScore = Int.random(in: 17...21)
-        if cpuScore > player.score {
+        
+        if randomComputerScore > player.score {
             print ("Sorry! You Lost 😭")
-        } else if cpuScore < player.score {
+        } else if randomComputerScore < player.score {
                 print("🔥YOU'RE 👏🏾 A 👏🏾 FREAKIN'👏🏾 ROCKSTAR! 🔥")
         } else {
             print(" 💀 IT'S A TIE 🤡 ")
@@ -61,22 +65,25 @@ class Game {
     }
     
     
-    func gameStatus(playerCard: [Card]) -> Int {
-        var currentScore = player.score
+    func gameStatus() -> Int {
+       
         let hitMeScore = hitMe()?.value
         
-        currentScore += hitMeScore ?? 0
+        player.score += hitMeScore ?? 0
         
-        if currentScore < 20 {
+        if player.score < 20 {
             print ("Hit or Pass")
-        } else if currentScore == 21 {
+        } else if player.score == 21 {
             print ("BOOM!!! BLACK JACK ! ")
-        } else if currentScore > 21 {
+        } else if player.score > 21 {
             print("Beat it BUSTER!!!! Haha, get it? That's a BUST")
         }
         
-        return currentScore
+        return player.score
     }
     
 }
-  var tiffanyBlack = Game(player: Player(score: 0, cards: Card.newDeck(aceValue: 11), playerName: "Tiffany"), hitPlayer: true)
+
+
+//var tiffanyBlack = Game.init(player: Player(score: 0, cards: [], playerName: ""), hitPlayer: true)
+

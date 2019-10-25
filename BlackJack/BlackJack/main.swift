@@ -15,10 +15,9 @@ import Foundation
 
 var gameOver:Bool = false
 var hitOrPassStatement = """
-Choose Wisely. Type in 1 or 2
-1. Hit
-2. Pass
+Choose Wisely. Type in "Hit" or "Pass" to Start!
 """
+var tiffanyBlack = Game.init(player: Player(score: 0, cards: [], playerName: ""), hitPlayer: true)
 
 
 repeat {
@@ -30,22 +29,31 @@ repeat {
     let userStartsGame = readLine() ?? ""
     
     if userStartsGame.uppercased().lowercased() == "yes"{
-        print(hitOrPassStatement)
         
-        let userHitOrPass = readLine() ?? ""
+        print("What is your name ?")
         
-        if userHitOrPass == "1" {
+        let userNameInput = readLine() ?? ""
+        
+        tiffanyBlack.player.playerName.append(contentsOf: userNameInput)
+        
+        print("Awesome \(userNameInput)! \(hitOrPassStatement)")
+    
+     let userStartPlaying = readLine() ?? ""
+    
+    if userStartPlaying.uppercased().lowercased() == "hit" {
             tiffanyBlack.hitPlayer = true
             
             if tiffanyBlack.hitPlayer == true {
-                print(tiffanyBlack.hitMe() ?? Card(suit: Suit.diamond, value: 7, isFaceCard: false, face: nil))
-            }
-        } else if userHitOrPass == "2"{
+                
+                print(tiffanyBlack.hitMe() ?? Card(suit: Suit.spade, value: 10, isFaceCard: true, face: FaceCard.queen))
+                }
+            }else if userStartPlaying.uppercased().lowercased() == "pass" {
             
-          print("You're Score is..... \(tiffanyBlack.gameStatus(playerCard: tiffanyBlack.player.cards))")
+        print("You're Score is..... \(tiffanyBlack.gameStatus())")
     
         }
-  } else if userStartsGame.uppercased().lowercased() == "no"{
+    }
+ if userStartsGame.uppercased().lowercased() == "no"{
         print("Thanks for playing! Have a great day!")
         gameOver = false
         
@@ -53,5 +61,5 @@ repeat {
     
     
 } while
- gameOver
+        gameOver
 
