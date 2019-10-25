@@ -44,7 +44,9 @@ var userStartsGame = readLine() ?? ""
         
         tiffanyBlack.player.playerName.append(contentsOf: userNameInput)
  print("Awesome \(userNameInput)! \(hitOrPassStatement)")
-
+        
+        repeat {
+        
 repeat {
     
      let userStartPlaying = readLine() ?? ""
@@ -63,12 +65,20 @@ repeat {
         }
     
 } while gameOver == false
-
+        
         print("Would you Like to play again?")
         
-        userStartsGame = readLine() ?? ""
+        let userStartsGameAgain = readLine() ?? ""
         
-    }else if userStartsGame.uppercased().lowercased() == "no"{
+        if userStartsGameAgain == "yes" {
+gameOver = false
+        } else {
+            gameOver = true
+        }
+
+        }   while gameOver == false
+        
+            } else if userStartsGame.uppercased().lowercased() == "no"{
     print("Thanks for playing! Have a great day!")
     gameOver = true
     
